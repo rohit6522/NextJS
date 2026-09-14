@@ -9,9 +9,13 @@ export async function GET(){
   return NextResponse.json(students)
 }
 
-// export async function POST() {
-  
-// }
+export async function POST(request) {
+  const data = await request.json();
+  return Response.json({
+    message: "Student Added",
+    students : data
+  })
+}
 
 // export async function PUT() {
   
