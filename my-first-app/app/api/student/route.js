@@ -12,6 +12,7 @@ export async function GET() {
 }
 
 export async function POST(request) {
+
   const data = await request.json();
 
   if(Array.isArray(data)){
@@ -64,11 +65,11 @@ export async function PUT(request) {
 export async function DELETE(request){
   const data = await request.json();
 
-  const Index = students.findIndex(
+  const index = students.findIndex(
     item => item.id == data.id)
 
   
-  if(Index === -1){
+  if(index === -1){
     return Response.json(
       {message:"Student Not found"},
       {status:404}
