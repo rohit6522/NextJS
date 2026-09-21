@@ -1,3 +1,4 @@
+import { responseCookiesToRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 import { NextResponse } from "next/server"
 
 const students = [
@@ -33,7 +34,7 @@ export async function POST(request) {
 
 
 
-export async function PUT() {
+export async function PUT(request) {
   const data =  await request.json();
   const student = students.find(item=>item.id==data.id)
 
@@ -60,6 +61,26 @@ export async function PUT() {
 
 // }
 
-// export async function DELETE(){
+export async function DELETE(request){
+  const data = await request.json();
 
-// }
+  const Index = students.findIndex(
+    item => item.id == data.id)
+
+  
+  if(Index === -1){
+    return Response.json(
+      {message:"Student Not found"},
+      {status:404}
+    )
+  }
+
+  const deleteStudent = students.splice(index,1)
+
+  return Response.json(
+    {message:"Student delete successfully",
+      student:deleteStudent[0],
+    }
+  )
+
+}
